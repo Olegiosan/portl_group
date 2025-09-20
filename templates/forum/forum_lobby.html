@@ -2,17 +2,31 @@
 
 {% block content %}
 
-
-<body>
         <ul>
             {% for post in posts %}
                 <li>
-                    <h2>{{post.title}}</h2>
+                    <h2><a href="{% url 'post_details' post.id %}">{{post.title}}</a></h2>
 
                     <b>Created by {{post.user}}</b>
 
                     <p>{{post.description}}</p>
+                    <p>	&#128077 {{post.likes.count}}     |     &#128078 {{post.likes.count}}</p>
                 </li>
             {% endfor %}
         </ul>
+
+{% if is_paginated %}
+  <div class="d-flex justify-content-center">
+    <ul class="pagination">
+      {% for num in page_obj.paginator.page_range %}
+        {% if page_obj.number == num %}
+          <li class="page-item active"><a class="page-link">{{ num }}</a></li>
+        {% else %}
+          <li class="page-item"><a class="page-link" href="?page={{ num }}">{{ num }}</a></li>
+        {% endif %}
+      {% endfor %}
+    </ul>
+  </div>
+{% endif %}
+
 {% endblock %}

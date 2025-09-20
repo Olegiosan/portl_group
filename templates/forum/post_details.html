@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<h2>{{post.title}}</h2>
+
+<b>Created by {{post.user}}</b>
+
+<p>{{post.description}}</p>
+
+<small>Published date {{post.published_date}}</small>
+
+<h3>Comments</h3>
+{% for comment in post.comments.all %}
+<p>{{comment.user}} прокоментував: {{comment.description}}</p>
+{% endfor %}
+{% endblock %}
