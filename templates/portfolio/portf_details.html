@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<h2>{{portfolio.title}}</h2>
+
+<b>Created by {{portfolio.user}}</b>
+
+<p>{{portfolio.description}}</p>
+
+<small>Published date {{portfolio.published_date}}</small>
+
+{% if portfolio.images.exists %}
+    {%for img in portfolio.images.all%}
+        <p><img src="{{ img.image.url }}" alt="Photo"></p>
+    {% endfor %}
+{% elif porfolio.files.exists%}
+    {% for file in portfolio.files%}
+        <p><a href="{{ file.url }}">File</a>adadad</p>
+    {% endfor %}
+{% endif %}
+{% endblock %}

@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'authentic_app',
     'forum',
+    'portfolio',
 ]
 
 MIDDLEWARE = [
@@ -127,4 +128,7 @@ AUTH_USER_MODEL = "authentic_app.CustomUser"
 
 STATIC_URL = '/static/'
 
-STATICFILES_DIRS = [BASE_DIR / "static"]
+DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+MEDIA_URL = '/media/'
+MEDIA_ROOT = BASE_DIR / 'media'
+LOGIN_REDIRECT_URL = '/forum/'

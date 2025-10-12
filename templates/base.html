@@ -12,7 +12,9 @@
       <div class="container-fluid">
           {% load static %}
           <img src="{% static 'pictures/logo.png' %}" alt="Logo" width="60" height="40">
+
         <a class="navbar-brand" href="{% url 'forum_lobby' %}">Forum</a>
+        <a class="navbar-brand" href="{% url 'portf_lobby' %}">Portfolios</a>
 
           {% if not request.user.is_authenticated %}
             <a class="navbar-brand" href="{% url 'user_login' %}">Login</a>
@@ -22,11 +24,12 @@
             <p>Loggined as {{request.user.username}}</p>
 
           {% endif %}
-
-      </div>
+    </div>
     </nav>
+    <main class="container-sm">
     {% block content %}
     {% endblock %}
+    </main>
 </body>
 
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>

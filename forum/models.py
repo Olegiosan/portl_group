@@ -11,9 +11,10 @@ class Post(models.Model):
     published_date = models.DateTimeField(auto_now_add=True)
     likes = models.ManyToManyField(settings.AUTH_USER_MODEL, related_name="liked_post", blank=True)
     dislikes = models.ManyToManyField(settings.AUTH_USER_MODEL, related_name="disliked_post", blank=True)
+    post_image = models.ImageField(upload_to="post/", blank=True, null=True)
 
     def __str__(self):
-        return self.title
+        return "Пост " + self.title
 
 class Comments(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
@@ -23,5 +24,4 @@ class Comments(models.Model):
     dislikes = models.ManyToManyField(settings.AUTH_USER_MODEL, related_name="disliked_comment", blank=True)
 
     def __str__(self):
-        return self.description
-
+        return "Коментар " + self.user + " до поста " + self.post

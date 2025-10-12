@@ -10,7 +10,27 @@
                     <b>Created by {{post.user}}</b>
 
                     <p>{{post.description}}</p>
-                    <p>	&#128077 {{post.likes.count}}     |     &#128078 {{post.likes.count}}</p>
+
+                    {% if post.post_image %}
+
+                        <p><img src="{{ post.post_image.url }}" alt="Photo"></p>
+
+                    {% endif %}
+
+                    <div class="container text-center">
+                    <div style="display: flex; gap: 10px;">
+                    <div class="row">
+                    <div class="col-12 col-lg-6">
+
+                    <p>	<form  method = "post" action = "{% url 'like_or_dislike' 'like' post.id %}" >{% csrf_token %}
+                    <button type="submit" class="btn btn-success w-100">&#128077 {{post.likes.count}} Like</button> </form>
+                    </div>
+                    <div class="col-12 col-lg-6">
+                    <p>	<form  method = "post" action = "{% url 'like_or_dislike' 'dislike' post.id %}" >{% csrf_token %}
+                    <button type="submit" class="btn btn-success w-100">&#128078 {{post.dislikes.count}} Dislike</button> </form> </p>
+
+                    </div></div></div></div>
+
                 </li>
             {% endfor %}
         </ul>

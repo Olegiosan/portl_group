@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+        <ul>
+            {% for portfolio in portfolios %}
+                <li>
+                    <h2><a href="{% url 'portf_details' portfolio.id %}">Портфоліо від {{portfolio.user}}</a></h2>
+                    <div style="display: flex; gap: 10px;">
+
+                    <p>	<form  method = "post" action = "{% url 'like_or_dislikes' 'like' portfolio.id %}" >{% csrf_token %}
+                    <button type="submit" class="btn btn-success w-100">&#128077 {{portfolio.likes.count}} Like</button> </form>
+                    <p>	<form  method = "post" action = "{% url 'like_or_dislikes' 'dislike' portfolio.id %}" >{% csrf_token %}
+                    <button type="submit" class="btn btn-success w-100">&#128078 {{portfolio.dislikes.count}} Dislike</button> </form> </p>
+
+                    </div>
+
+                </li>
+            {% endfor %}
+        </ul>
+
+{% if is_paginated %}
+  <div class="d-flex justify-content-center">
+    <ul class="pagination">
+      {% for num in page_obj.paginator.page_range %}
+        {% if page_obj.number == num %}
+          <li class="page-item active"><a class="page-link">{{ num }}</a></li>
+        {% else %}
+          <li class="page-item"><a class="page-link" href="?page={{ num }}">{{ num }}</a></li>
+        {% endif %}
+      {% endfor %}
+    </ul>
+  </div>
+{% endif %}
+
+
+{% endblock %}
